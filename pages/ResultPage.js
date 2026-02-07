@@ -16,4 +16,8 @@ export default class ResultPage {
     {
         await this.actions.click('a[href="roles"]');
     }
+    async goToSequencePage()
+    {
+        await this.actions.click('a[href="sequences"]');
+    }
 }
