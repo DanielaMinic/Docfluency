@@ -2,6 +2,8 @@ import LoginPage from '../pages/LoginPage';
 import ResultPage from './ResultPage';
 import RolePage from './RolePage';
 import DelovodniPage from './DelovodniPage';
+import TypePage from './TypePage';
+import DocumentPage from './DocumentPage'
 export default class PomManager {
     constructor(page){
         this.page = page;
@@ -9,5 +11,7 @@ export default class PomManager {
         this.resultPage = new ResultPage(page);
         this.rolePage = new RolePage(page);
         this.sequencePage = new DelovodniPage(page);
+        this.typePage = new TypePage(page);
+        this.documentPage = new DocumentPage(page);
     }
 }

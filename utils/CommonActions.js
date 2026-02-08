@@ -18,4 +18,8 @@ export default class CommonActions{
     async isChecked(selector){
         return await this.page.isChecked(selector);
     }
+    async insertDocument(selector, documentPath)
+    {
+        await this.page.locator(selector).setInputFiles(documentPath);
+    }
 }

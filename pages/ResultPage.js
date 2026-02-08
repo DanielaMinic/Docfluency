@@ -20,4 +20,12 @@ export default class ResultPage {
     {
         await this.actions.click('a[href="sequences"]');
     }
+    async goToTypePage()
+    {
+        await this.actions.click('a[href="types"]');
+    }
+    async goToDocumentPage()
+    {
+        await this.actions.click('a[href="documents"]');
+    }
 }
