@@ -3,7 +3,7 @@ export default class CommonActions{
         this.page = page;
     }
     async navigate(url){
-        await this.page.pause();
+        // await this.page.pause();
         await this.page.goto(url);
     }
     async click(selector){

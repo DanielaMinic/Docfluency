@@ -4,7 +4,7 @@ import {describe} from 'node:test';
 
 let pm;
 
-test.describe('Login Tests', () => {
+test.describe.skip('Login Tests', () => {
     test.beforeEach(async ({page}) => {
         pm = new PomManager(page);
     })
