@@ -8,13 +8,25 @@ import {describe} from 'node:test';
             await page.fill('#username', 'little');
             await page.fill('#password', 'lemur');
             await page.click('#kc-login');
-            await page.click('a[href="sequences"]');
+            await page.goto('https://docfluence.softfluency.com/sequences')
             await page.click('button[title="New Sequence"]');
-            await page.fill(':nth-match(input[inputmode="text"], 1)', 'brSocijalnaZastita');
-            await page.fill(':nth-match(input[inputmode="text"], 2)', 'Socijalna zastita')
-            await page.click(':nth-match(input[inputmode="text"], 3)');
-            await page.click('text="Four-digit number (e.g. 0001)"');
-            await page.click(':nth-match(button[type="submit"], 2)');
+            await page.fill(':nth-match(input[inputmode="text"], 1)', 'NoviBroj');
+            await page.click('text="Add"');
+            await page.click('text="Counter"');
+            await page.click('text="Save"');
+            await page.click('text="Add"');
+            await page.click('text="Organization unit"');
+            await page.getByRole('combobox', { name: 'Organization unit*' }).click();
+            await page.getByRole('option', { name: 'Министар одбране' }).click();
+            await page.click('text="Save"');
+            await page.click('text="Add"');
+            await page.click('text="Year"');
+            await page.click('text="Save"');
+            await page.click('text="Add"');
+            await page.click('text="Fixed text"');
+            await page.getByRole('textbox', { name: 'Value*' }).fill('A');
+            await page.click('text="Save"');
+            await page.click('text="Save"');
             await page.click('text="Delete"');
             await page.click('text="Delete"');
         })

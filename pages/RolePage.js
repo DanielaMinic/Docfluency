@@ -17,5 +17,13 @@ export default class RolePage {
     async deleteRole(){
         await this.actions.click('text="Delete"');
         await this.actions.click('text="Delete"');
+
     }
+    async getErrorMessage(){
+        return await this.actions.getText('#input-error');
+    }
+    async assertErrorMessage(expectedMessage){
+        const actualMessage = await this.getErrorMessage();
+        expect(actualMessage).toContain(expectedMessage);
+        }
 }

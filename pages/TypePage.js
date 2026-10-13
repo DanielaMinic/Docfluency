@@ -6,11 +6,11 @@ export default class DelovodniPage {
     }
     async newType()
     {
-        await this.actions.click('button[title="New document type"]');
+        await this.actions.click('button[title="Нови тип документа"]');
     }
     async selectGroup()
     {
-        await this.actions.click('text="-- No group --"');
+        await this.actions.click('text="-- Нема групу --"');
         await this.actions.click('text="Opšta"');
     }
     async enterName(name)
@@ -27,11 +27,11 @@ export default class DelovodniPage {
     }
     async makeType()
     {
-        await this.actions.click(':nth-match(button[type="submit"], 2)');
+        await this.actions.click('text="Сачувај"');
     }
     async deleteType()
     {
-        await this.actions.click('text="Delete"');
-        await this.actions.click('text="Delete"');
+        await this.actions.click('text="Обриши"');
+        await this.actions.click('text="Обриши"');
     }
 }

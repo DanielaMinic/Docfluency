@@ -7,7 +7,8 @@ export default class DelovodniPage {
         }
         async newDocument()
         {
-            await this.actions.click('a[title="New document"]');
+            await this.actions.click('text="Додај"');
+            await this.actions.click('text="Нови документ"');
         }
         async nameDocument(name)
         {
@@ -28,11 +29,12 @@ export default class DelovodniPage {
         }
         async makeDocument()
         {
-            await this.actions.click('text="Save"');
+            await this.actions.click('text="Сачувај"');
         }
         async deleteDocument()
         {
-            await this.actions.click('text="Delete"');
-            await this.actions.click('text="Delete"');
+            await this.actions.click('button[class="mud-button-root mud-icon-button mud-ripple mud-ripple-icon mud-menu-icon-button-activator"]');
+            await this.actions.click('text="Обриши"');
+            await this.actions.click('text="Обриши"');
         }
     }

@@ -22,6 +22,7 @@ export default class ResultPage {
     }
     async goToTypePage()
     {
+        await this.actions.click('text="Администрација Система"')
         await this.actions.click('a[href="types"]');
     }
     async goToDocumentPage()
