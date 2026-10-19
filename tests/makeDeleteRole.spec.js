@@ -1,18 +1,31 @@
+
 import { test, expect } from '@playwright/test';
-import {describe} from 'node:test';
-    test.afterEach(async ({page}) => {
-        await page.close();
-    })
-    test.only('Make and delete role', async({page}) => {
-            await page.goto('https://docfluence.softfluency.com/authentication/login/')
-            await page.fill('#username', 'little');
-            await page.fill('#password', 'lemur');
-            await page.click('#kc-login');
-            await page.goto('https://docfluence.softfluency.com/roles');
-            await page.click('button[title="New role"]');
-            await page.fill('input[type="text"]', 'Službenik');
-           const errorMessage = page.getByText( 'A role with this name already exists',{ exact: true });
-        //await page.getByRole('button', { name: 'Save' }).click();
-        //await page.click('text="Delete"');
-        //await page.click('text="Delete"');
-    })
+import { LoginPage } from '../pages/LoginPage.js';
+import { RolePage } from '../pages/RolePage.js';
+
+test('Kreiranje i brisanje role', async ({ page }) => {
+  const loginPage = new LoginPage(page);
+  const rolePage = new RolePage(page);
+
+  // 1. Login to Docfluence
+  await loginPage.open();
+  await loginPage.login();
+
+  // 2. Open Roles
+  await rolePage.openRoles();
+
+  // 3. Create a role with a unique name
+  const roleName = `Službenik_${Date.now()}`;
+
+  await rolePage.createRole(roleName);
+
+  // 4. Verify that the role was created
+  await expect(
+    page.getByText(roleName, { exact: true })
+  ).toBeVisible({ timeout: 15000 });
+
+  // 5. Delete the role
+  await rolePage.deleteRole();
+
+  console.log(`Role "${roleName}" was created and deleted.`);
+});

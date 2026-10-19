@@ -9,6 +9,23 @@ import {describe} from 'node:test';
             await page.fill('#password', 'lemur');
             await page.click('#kc-login');
             await page.goto('https://docfluence.softfluency.com/sequences')
+             // Find Administration using its SVG icon
+  const administration = page.locator(
+    'button:has(svg path[d^="M19.14,12.94"])'
+  );
+
+  // Verify that exactly one Administration button exists
+  console.log(
+    'Administration dugme:',
+    await administration.count()
+  );
+
+  await expect(administration).toHaveCount(1);
+
+  // Expand Administration if it is collapsed
+  if (await administration.getAttribute('aria-expanded') !== 'true') {
+    await administration.click();
+  }
             await page.click('button[title="New Sequence"]');
             await page.fill(':nth-match(input[inputmode="text"], 1)', 'NoviBroj');
             await page.click('text="Add"');

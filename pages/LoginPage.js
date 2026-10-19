@@ -1,24 +1,46 @@
-import {expect} from '@playwright/test';
-import CommonActions from '../utils/CommonActions.js';
-export default class LoginPage{
-    constructor(page){
-        this.actions = new CommonActions(page);
-        this.usernameSelector = '#username';
-        this.passwordSelector = '#password';
-    }
-    async navigate(){
-        await this.actions.navigate('https://docfluence.softfluency.com/authentication/login/')
-    }
-    async login(username, password){
-        await this.actions.fill(this.usernameSelector, username);
-        await this.actions.fill(this.passwordSelector, password);
-        await this.actions.click('#kc-login');
-    }
-    async getErrorMessage(){
-        return await this.actions.getText('#input-error');
-    }
-    async assertErrorMessage(expectedMessage){
-        const actualMessage = await this.getErrorMessage();
-        expect(actualMessage).toContain(expectedMessage);
-    }
+import { expect } from '@playwright/test';
+
+export class LoginPage {
+  constructor(page) {
+    this.page = page;
+
+    this.signInButton = page.getByRole('button', {
+      name: 'Sign in',
+      exact: true
+    });
+
+    this.usernameInput = page.getByRole('textbox', {
+      name: 'Username or email'
+    });
+
+    this.passwordInput = page.getByRole('textbox', {
+      name: 'Password'
+    });
+
+    this.submitButton = page.getByRole('button', {
+      name: 'Sign In',
+      exact: true
+    });
+  }
+
+  async open() {
+    await this.page.goto(
+      'https://docfluence.softfluency.com/'
+    );
+  }
+
+  async login(
+    username = process.env.DOCFLUENCE_USERNAME || 'little',
+    password = process.env.DOCFLUENCE_PASSWORD || 'lemur'
+  ) {
+    await this.signInButton.click();
+
+    await this.usernameInput.fill(username);
+    await this.passwordInput.fill(password);
+
+    await this.submitButton.click();
+  }
+  async errormsg(){
+    await expect(this.page.getByText('Invalid username or password.')).toBeVisible();
+  }
 }
